@@ -1,0 +1,26 @@
+#
+#  Completion for historian:
+#
+#  hist config
+#  hist count
+#  hist import
+#  hist search
+#  hist shell
+#  hist version
+
+_hist()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    #
+    #  The basic options we can complete
+    #
+    opts="config count import shell search version"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+
+complete -F _hist hist
