@@ -1,6 +1,7 @@
 #
 #  Completion for historian:
 #
+#  hist complete
 #  hist config
 #  hist count
 #  hist import
@@ -19,6 +20,12 @@ _hist()
     #  The basic options we can complete
     #
     opts="config count import shell search version"
+
+    if [[ "${prev}" == "complete" ]] ; then
+
+        COMPREPLY=$( hist complete "${cur}" )
+        return 0
+    fi
 
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 }
