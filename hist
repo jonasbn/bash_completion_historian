@@ -9,6 +9,23 @@
 #  hist shell
 #  hist version
 
+_fetch_entries () {
+    local IFS=' '
+    local cur=$1
+    local i=0
+
+    echo "searching for $cur"
+
+    local entries=$( hist complete "${cur}" )
+
+    for entry in "${entries[@]}";
+        do words=($entry)
+        echo "Entry = $entry"
+    done
+
+    COMPREPLY=( $(compgen -W "${words+1}" -- ${cur}) )
+}
+
 _hist()
 {
     local cur prev opts
@@ -22,8 +39,8 @@ _hist()
     opts="config count import shell search version"
 
     if [[ "${prev}" == "complete" ]] ; then
-
-        COMPREPLY=$( hist complete "${cur}" )
+        #COMPREPLY=$( hist complete "${cur}" )
+        _fetch_entries $cur
         return 0
     fi
 
