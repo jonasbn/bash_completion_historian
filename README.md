@@ -2,6 +2,8 @@
 
 Incredibly basic `bash` completion for [**historian**](https://github.com/jcsalterego/historian).
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Usage
 
 ```
