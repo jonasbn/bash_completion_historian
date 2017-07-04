@@ -10,20 +10,32 @@
 #  hist version
 
 _fetch_entries () {
-    local IFS=' '
+    #local IFS=' '
     local cur=$1
-    local i=0
 
     echo "searching for $cur"
 
-    local entries=$( hist complete "${cur}" )
+    # elements=$(echo ${cur})
 
-    for entry in "${entries[@]}";
-        do words=($entry)
-        echo "Entry = $entry"
-    done
+    # length=${#elements[@]}
 
-    COMPREPLY=( $(compgen -W "${words+1}" -- ${cur}) )
+    # local entries=$( hist suggest "${cur}" )
+
+    # local IFS='\n'
+    # for entry in "${entries[@]}";
+    #     do
+    #     #echo "Entry = $entry"
+    #     words=$(echo ${entry})
+    #     #for word in "${words[@]}";
+    #         #do echo "Word = $word"
+    #     #done
+    # done
+
+    words="foo bar baz"
+
+    echo "${words}"
+
+    COMPREPLY=( $(compgen -W "${words}" -- ${cur}) )
 }
 
 _hist()
@@ -38,8 +50,7 @@ _hist()
     #
     opts="config count import shell search version"
 
-    if [[ "${prev}" == "complete" ]] ; then
-        #COMPREPLY=$( hist complete "${cur}" )
+    if [[ "${prev}" == "suggest" ]] ; then
         _fetch_entries $cur
         return 0
     fi
